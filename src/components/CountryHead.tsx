@@ -1,9 +1,28 @@
-export default function CountryHead() {
+interface ICountryHeadProps {
+  nameSort: string;
+  populationSort: string;
+  onUpdateNameSort: () => void;
+  onUpdatePopulationSort: () => void;
+}
+
+export default function CountryHead({
+  nameSort,
+  populationSort,
+  onUpdateNameSort,
+  onUpdatePopulationSort,
+}: ICountryHeadProps) {
+  const ASC = '↓';
+  const DESC = '↑';
+
   return (
     <div className="list-head-wrapper">
-      <h3>Name</h3>
+      <h3 className="header-clickable" onClick={onUpdateNameSort}>
+        Name {nameSort === 'ASC' ? ASC : DESC}
+      </h3>
       <h3>Region</h3>
-      <h3>Population</h3>
+      <h3 className="header-clickable" onClick={onUpdatePopulationSort}>
+        Population {populationSort === 'ASC' ? ASC : DESC}
+      </h3>
       <h3>Flag</h3>
     </div>
   );

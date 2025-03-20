@@ -52,5 +52,5 @@ export function useCountriesHook({ searchValue, filter }: ICountriesProps) {
     })();
   }, [searchValue, filter]);
 
-  return { data, error, loading, regions };
+  return { data, error, loading, regions, setData };
 }
