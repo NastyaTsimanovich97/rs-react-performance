@@ -32,3 +32,10 @@
   display: grid;
   grid-template-columns: repeat(4, 300px);
 }
+
+.dropdown-wrapper {
+  display: grid;
+  grid-template-columns: 150px 300px;
+  padding-bottom: 2em;
+  justify-items: baseline;
+}
