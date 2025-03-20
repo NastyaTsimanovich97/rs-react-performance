@@ -13,6 +13,13 @@
   color: #888;
 }
 
+.search-container {
+  display: grid;
+  grid-template-columns: auto 150px;
+  grid-column-gap: 100px;
+  padding: 2em 0;
+}
+
 .list-head-wrapper {
   display: grid;
   grid-template-columns: repeat(4, 300px);

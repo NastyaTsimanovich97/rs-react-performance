@@ -3,7 +3,11 @@ import { ICountry } from '../interfaces/country';
 
 const URL = 'https://restcountries.com/v3.1/all';
 
-export function useCountriesHook() {
+interface ICountriesProps {
+  searchValue: string;
+}
+
+export function useCountriesHook({ searchValue }: ICountriesProps) {
   const [data, setData] = useState<ICountry[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -15,7 +19,14 @@ export function useCountriesHook() {
         const response = await fetch(URL);
 
         if (response.ok) {
-          const data = await response.json();
+          let data: ICountry[] = await response.json();
+
+          if (searchValue) {
+            data = data.filter((item) =>
+              item.name.common.includes(searchValue)
+            );
+          }
+
           setData(data);
         } else {
           setError('Server is not available');
@@ -27,7 +38,7 @@ export function useCountriesHook() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [searchValue]);
 
   return { data, error, loading };
 }
