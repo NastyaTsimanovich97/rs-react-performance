@@ -31,6 +31,11 @@
 .list-item-wrapper {
   display: grid;
   grid-template-columns: repeat(4, 300px);
+  cursor: pointer;
+}
+
+.list-item-highlighted {
+  background-color: #eeffe5;
 }
 
 .dropdown-wrapper {

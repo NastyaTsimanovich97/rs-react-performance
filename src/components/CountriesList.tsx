@@ -13,10 +13,21 @@ export default function CountriesList() {
   const [populationSort, setPopulationSort] = useState<string>('ASC');
 
   const [searchValue, setSearchValue] = useLocalStorage();
+  const [visited, setVisited] = useLocalStorage('visited');
   const { data, loading, regions, setData } = useCountriesHook({
     searchValue,
     filter,
   });
+
+  const onUpdateVisited = useCallback(
+    (country: string) => {
+      const visitedObj = visited ? JSON.parse(visited) : {};
+      visitedObj[country] = !visitedObj[country];
+
+      setVisited(JSON.stringify(visitedObj));
+    },
+    [visited]
+  );
 
   const onUpdateSearch = useCallback(
     (searchValue: string) => {
@@ -63,10 +74,17 @@ export default function CountriesList() {
   };
 
   const renderedItems = useMemo(() => {
+    const visitedObj = visited ? JSON.parse(visited) : {};
+
     return data?.map((country) => (
-      <Country key={country.name.common} country={country} />
+      <Country
+        visited={visitedObj[country.name.common]}
+        onUpdateVisited={onUpdateVisited}
+        key={country.name.common}
+        country={country}
+      />
     ));
-  }, [data, nameSort, populationSort, searchValue]);
+  }, [data, nameSort, populationSort, searchValue, visited]);
 
   return (
     <section>
