@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 interface ICountryHeadProps {
   nameSort: string;
   populationSort: string;
@@ -5,7 +7,7 @@ interface ICountryHeadProps {
   onUpdatePopulationSort: () => void;
 }
 
-export default function CountryHead({
+const CountryHead = memo(function CountryHead({
   nameSort,
   populationSort,
   onUpdateNameSort,
@@ -26,4 +28,6 @@ export default function CountryHead({
       <h3>Flag</h3>
     </div>
   );
-}
+});
+
+export default CountryHead;

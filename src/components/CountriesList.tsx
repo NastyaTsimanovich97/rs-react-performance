@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useCountriesHook } from '../hooks/useCountriesHook';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import Country from './Country';
@@ -18,13 +18,16 @@ export default function CountriesList() {
     filter,
   });
 
-  const onUpdateSearch = (searchValue: string) => {
-    setSearchValue(searchValue || '');
-  };
+  const onUpdateSearch = useCallback(
+    (searchValue: string) => {
+      setSearchValue(searchValue || '');
+    },
+    [searchValue]
+  );
 
-  const onUpdateFilter = (value: string) => {
+  const onUpdateFilter = useCallback((value: string) => {
     setFilter(value);
-  };
+  }, []);
 
   const onUpdateNameSort = () => {
     setNameSort((state) => (state === 'ASC' ? 'DESC' : 'ASC'));
@@ -59,6 +62,12 @@ export default function CountriesList() {
     setData(values);
   };
 
+  const renderedItems = useMemo(() => {
+    return data?.map((country) => (
+      <Country key={country.name.common} country={country} />
+    ));
+  }, [data, nameSort, populationSort, searchValue]);
+
   return (
     <section>
       <Search
@@ -73,9 +82,7 @@ export default function CountriesList() {
         onUpdatePopulationSort={onUpdatePopulationSort}
       />
       {loading && <SkeletonList />}
-      {data?.map((country) => (
-        <Country key={country.name.common} country={country} />
-      ))}
+      {renderedItems}
     </section>
   );
 }

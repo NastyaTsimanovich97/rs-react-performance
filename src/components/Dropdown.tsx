@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 interface IDropdownProps {
   options: string[] | null;
   onUpdateFilter: (value: string) => void;
 }
 
-export default function Dropdown({ options, onUpdateFilter }: IDropdownProps) {
+const Dropdown = memo(function Dropdown({
+  options,
+  onUpdateFilter,
+}: IDropdownProps) {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -27,4 +30,6 @@ export default function Dropdown({ options, onUpdateFilter }: IDropdownProps) {
       </select>
     </div>
   );
-}
+});
+
+export default Dropdown;

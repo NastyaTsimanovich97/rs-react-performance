@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { ICountry } from '../interfaces/country';
 
 interface ICountryProps {
   country: ICountry;
 }
 
-export default function Country({ country }: ICountryProps) {
+const Country = memo(function Country({ country }: ICountryProps) {
   return (
     <div className="list-item-wrapper">
       <p>{country.name.common}</p>
@@ -13,4 +14,6 @@ export default function Country({ country }: ICountryProps) {
       <p>{country.flag}</p>
     </div>
   );
-}
+});
+
+export default Country;
