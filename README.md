@@ -17,7 +17,7 @@
 - **Render Duration:** 21.6ms
 - **Interactions:** Click on Sorting by Population.
 - **Flame Graph:** [Flame Graph](profiling/init_profiling_sorting_population_flamegraph.png).
-- **Ranked Chart:** [Ranked Chart](profiling/init_profiling%20sorting_population_ranked.png).
+- **Ranked Chart:** [Ranked Chart](profiling/init_profiling_sorting_population_ranked.png).
 
 **Filtering**
 ![Profile](profiling/init_filtering.png)
